@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () { return __awaiter(voi
         switch (_a.label) {
             case 0:
                 id = getId();
-                url = "/app/getdata?clienteId=".concat(id);
+                url = "https://papeleria.xplaya.com/app/getdata?clienteId=".concat(id);
                 return [4 /*yield*/, fetch(url)];
             case 1:
                 resp = _a.sent();
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () { return __awaiter(voi
 // Registering Service Worker
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker
-        .register("/app/sw.js")
+        .register("/static/sw.js")
         .then(function (registration) {
         console.log("Service Worker Registered");
         console.log(registration);

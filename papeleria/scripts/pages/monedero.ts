@@ -56,15 +56,13 @@ export class Monedero {
     }
 }
 
-
-
 const monedero = $("#monedero");
 const monederoAttr = "data-cliente-id";
 let getId = () => monedero.attr(monederoAttr);
 
 document.addEventListener('DOMContentLoaded', async () => {
   const id = getId();
-  let url = `/app/getdata?clienteId=${id}`;
+  let url = `https://papeleria.xplaya.com/app/getdata?clienteId=${id}`;
   var resp = await fetch(url);
   var data = await resp.json() as unknown;
   var d = data as IMonederoData;
@@ -85,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Registering Service Worker
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-      .register("/app/sw.js")
+      .register("/static/sw.js")
       .then(registration => {
           console.log("Service Worker Registered");
           console.log(registration);

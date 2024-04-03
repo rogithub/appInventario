@@ -16,79 +16,19 @@
 <body>
     <div class="container">
         <main role="main" class="pb-3">
-            <script id="QrCode" type="text/html">
-                <div class="position-absolute top-50 start-50 translate-middle" data-bind="attr: { id: $data }"></div>
-            </script>
-
             <div id="monederoPage">
-                <h1 id="monedero" data-cliente-id="00000000-0000-0000-0000-000000000000">Monedero Electrónico</h1>
-                <div id="monedero-data">
-                    <div class="card">
-                    <h5 class="card-header">Monedero</h5>
-                    <div class="card-body">
-                    <div class="position-relative" style="height: 200px;">
-                    <!-- ko template: { name: "QrCode", data: data.cliente.id, afterRender: () => toQr(data.cliente.id) } -->
+                <h1 id="monedero" data-cliente-id='00000000-0000-0000-0000-000000000000'>Monedero Electrónico</h1>
+                <!-- ko if: init() -->
+                    <!-- ko template: { name: "MonederoContent" } -->
                     <!-- /ko -->
-                    </div>
-                    </div>
-                    </div>
-                    <hr/>
-                    <div class="card">
-                    <h5 class="card-header" data-bind="text: data.cliente.nombre"></h5>
-                    <div class="card-body">
-                    <p class="card-text">
-                    Muestra el código QR al cajero para acumular puntos en todas tus compras.
-                    </p>
+                <!-- /ko -->
+                <!-- ko if: !init() -->
                     <p>
-                    También lo puedes usar para pagar con dinero de tu monedero electrónico.
+                        Visita nuestra papelería para que te instalemos la app.
                     </p>
-                    <p class="card-text"><small class="text-body-secondary" data-bind="text: 'Cliente desde ' +  miembroDesde()"></small></p>
-                    </div>
-                    </div>
-                    <hr/>
-                    <!-- ko if: data.ventaMonederos.length === 0 -->
-                    <h3>No tiene compras recientes</h3>
-                    <!-- /ko -->
-                    <!-- ko if: data.ventaMonederos.length > 0 -->
-                    <table class="table g-3">
-                    <thead>
-                    <tr class="table-primary">
-                    <th scope="col">Mis Compras</th>
-                    <th scope="col">Mi Monedero</th>
-                    <th scope="col">Vencen</th>
-                    </tr>
-                    </thead>
-                    <tbody data-bind="foreach: { data: data.ventaMonederos, as: 'v' }">
-                    <tr>
-                    <td>
-                    <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" data-bind="attr: { href: '/recibo/' + v.ajusteId }" title="Recibo digital">
-                    <span data-bind="text: $root.toShortDate(v.fechaAjuste)"></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5" />
-                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z" />
-                    </svg>
-                    </a>
-                    </td>
-                    <td data-bind="text: $root.toCurrency(v.dineroDigitalDisponible)"></td>
-                    <td data-bind="text: $root.toShortDate(v.fechaExpiracion)"></td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                    <th>
-                    <span class="float-end">
-                    Total
-                    </span>
-                    </th>
-                    <th data-bind="text: $root.toCurrency($root.dineroDisponible())"></th>
-                    <th></th>
-                    </tr>
-                    </tfoot>
-                    </table>
-                    <!-- /ko -->
-                </div>
+                <!-- /ko -->
             </div>
-    </main>
+        </main>
     </div>
     <footer class="border-top footer text-body-secondary d-print-none">
         <div class="container">
@@ -100,7 +40,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js" integrity="sha512-vs7+jbztHoMto5Yd/yinM4/y2DOkPLt0fATcN+j+G4ANY2z4faIzZIOMkpBmWdcxt+596FemCh9M18NUJTZwvw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/static/lib/qrcode.min.js"></script>
-    <script type="text/javascript" src="/static/scripts/pages/monedero.ts"></script>
+    <script type="text/javascript" src="/static/js/monedero.js"></script>
     <script>
             let toQr = (id) => {        
             // https://davidshimjs.github.io/qrcodejs/
@@ -113,6 +53,82 @@
                 correctLevel: QRCode.CorrectLevel.H
             });        
         };
-        </script>
+    </script>
+
+    <script id="QrCode" type="text/html">
+        <div class="position-absolute top-50 start-50 translate-middle" data-bind="attr: { id: $data }"></div>
+    </script>
+    
+    <script id="MonederoContent" type="text/html">
+        <div id="monedero-data">    
+            <div class="card">
+                <h5 class="card-header">Monedero</h5>
+                <div class="card-body">
+                    <div class="position-relative" style="height: 200px;">                    
+                        <!-- ko template: { name: "QrCode", data: data.cliente.id, afterRender: () => toQr(data.cliente.id) } -->
+                        <!-- /ko -->  
+                    </div>    
+                </div>
+            </div>
+            <hr />
+    
+            <div class="card">
+                <h5 class="card-header" data-bind="text: data.cliente.nombre"></h5>
+                <div class="card-body">
+                    <p class="card-text">
+                        Muestra el código QR al cajero para acumular puntos en todas tus compras.        
+                    </p>
+                    <p>
+                        También lo puedes usar para pagar con dinero de tu monedero electrónico.
+                    </p>
+                    <p class="card-text"><small class="text-body-secondary" data-bind="text: 'Cliente desde ' +  miembroDesde()"></small></p>
+                </div>
+            </div>
+    
+            <hr />
+    
+            <!-- ko if: data.ventaMonederos.length === 0 -->
+            <h3>No tiene compras recientes</h3>
+            <!-- /ko -->
+    
+            <!-- ko if: data.ventaMonederos.length > 0 -->
+            <table class="table g-3">
+                <thead>        
+                    <tr class="table-primary">
+                        <th scope="col">Mis Compras</th>
+                        <th scope="col">Mi Monedero</th>
+                        <th scope="col">Vencen</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: { data: data.ventaMonederos, as: 'v' }">
+                    <tr>
+                        <td>
+                            <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" data-bind="attr: { href: '/recibo/' + v.ajusteId }" title="Recibo digital">
+                                <span data-bind="text: $root.toShortDate(v.fechaAjuste)"></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+                                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+                                </svg>    
+                            </a>                        
+                        </td>
+                        <td data-bind="text: $root.toCurrency(v.dineroDigitalDisponible)"></td>  
+                        <td data-bind="text: $root.toShortDate(v.fechaExpiracion)"></td>               
+                    </tr>         
+                </tbody>   
+                <tfoot>     
+                    <tr>
+                        <th>                
+                            <span class="float-end">
+                                Total
+                            </span>                            
+                        </th>
+                        <th data-bind="text: $root.toCurrency($root.dineroDisponible())"></th>
+                        <th></th>
+                    </tr>        
+                </tfoot>
+            </table>
+            <!-- /ko -->
+        </div>
+    </script>    
 </body>
 </html>
