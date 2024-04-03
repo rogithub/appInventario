@@ -1,15 +1,21 @@
 {
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts",
+    "build:webpack": "webpack"
   },
   "dependencies": {
-    "@hono/esbuild-transpiler": "^0.1.2",
     "@hono/node-server": "^1.9.1",
-    "esbuild": "^0.20.2",
     "hono": "^4.2.1",
-    "serve-static": "^1.15.0"
+    "serve-static": "^1.15.0"    
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/bootstrap": "^5.2.10",
+    "@types/jquery": "^3.5.29",
+    "@types/knockout": "^3.4.77",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.3",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   }
 }

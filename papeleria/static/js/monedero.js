@@ -2,7 +2,7 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 367:
+/***/ 816:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -21,7 +21,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -44,10 +44,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Monedero = void 0;
-var binderService_1 = __webpack_require__(575);
-var toShortDate_1 = __webpack_require__(904);
-var toShortMonth_1 = __webpack_require__(380);
-var toCurrency_1 = __webpack_require__(613);
+var binderService_1 = __webpack_require__(840);
+var toShortDate_1 = __webpack_require__(795);
+var toShortMonth_1 = __webpack_require__(297);
+var toCurrency_1 = __webpack_require__(646);
 var Monedero = /** @class */ (function () {
     function Monedero() {
         var self = this;
@@ -131,7 +131,59 @@ else {
 
 /***/ }),
 
-/***/ 904:
+/***/ 840:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.BinderService = void 0;
+/** Helper class that binds one Knockout models to a DOM object */
+var BinderService = /** @class */ (function () {
+    function BinderService() {
+    }
+    /**
+     * Binds a Knockout model to a DOM object.
+     * @param model Knockout model object.
+     * @param selector Selector of the DOM to apply bindings.
+     */
+    BinderService.bind = function (model, selector) {
+        var jqObj = $(selector);
+        if (jqObj.length === 0) {
+            return;
+        }
+        var domObj = jqObj[0];
+        ko.cleanNode(domObj);
+        ko.applyBindings(model, domObj);
+    };
+    BinderService.isBound = function (selector) {
+        var jqObj = $(selector);
+        return !!ko.dataFor(jqObj[0]);
+    };
+    return BinderService;
+}());
+exports.BinderService = BinderService;
+
+
+/***/ }),
+
+/***/ 646:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var intl = new Intl.NumberFormat('es-MX', {
+    style: "currency",
+    currency: "USD",
+    currencyDisplay: "narrowSymbol"
+});
+exports["default"] = (function (val) {
+    return intl.format(val);
+});
+
+
+/***/ }),
+
+/***/ 795:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -185,6 +237,62 @@ exports["default"] = (function (fechaAjuste) {
 });
 
 
+/***/ }),
+
+/***/ 297:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports["default"] = (function (fechaAjuste) {
+    var d = new Date(fechaAjuste);
+    var m = d.getMonth();
+    var month = "";
+    switch (m) {
+        case 0:
+            month = "Ene";
+            break;
+        case 1:
+            month = "Feb";
+            break;
+        case 2:
+            month = "Mzo";
+            break;
+        case 3:
+            month = "Abr";
+            break;
+        case 4:
+            month = "May";
+            break;
+        case 5:
+            month = "Jun";
+            break;
+        case 6:
+            month = "Jul";
+            break;
+        case 7:
+            month = "Ago";
+            break;
+        case 8:
+            month = "Sep";
+            break;
+        case 9:
+            month = "Oct";
+            break;
+        case 10:
+            month = "Nov";
+            break;
+        case 11:
+            month = "Dic";
+            break;
+        default:
+            month = "";
+            break;
+    }
+    return "".concat(month, " - ").concat(d.getFullYear());
+});
+
+
 /***/ })
 
 /******/ 	});
@@ -213,130 +321,12 @@ exports["default"] = (function (fechaAjuste) {
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/chunk loaded */
-/******/ 	(() => {
-/******/ 		var deferred = [];
-/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
-/******/ 			if(chunkIds) {
-/******/ 				priority = priority || 0;
-/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
-/******/ 				deferred[i] = [chunkIds, fn, priority];
-/******/ 				return;
-/******/ 			}
-/******/ 			var notFulfilled = Infinity;
-/******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var [chunkIds, fn, priority] = deferred[i];
-/******/ 				var fulfilled = true;
-/******/ 				for (var j = 0; j < chunkIds.length; j++) {
-/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
-/******/ 						chunkIds.splice(j--, 1);
-/******/ 					} else {
-/******/ 						fulfilled = false;
-/******/ 						if(priority < notFulfilled) notFulfilled = priority;
-/******/ 					}
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferred.splice(i--, 1)
-/******/ 					var r = fn();
-/******/ 					if (r !== undefined) result = r;
-/******/ 				}
-/******/ 			}
-/******/ 			return result;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			520: 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			return __webpack_require__.O(result);
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkro_inventario_web"] = self["webpackChunkro_inventario_web"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	})();
-/******/ 	
 /************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [712], () => (__webpack_require__(367)))
-/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__(816);
 /******/ 	
 /******/ })()
 ;

@@ -8,4 +8,9 @@ To run:
 bun run dev
 ```
 
+To webpack:
+```sh
+bun run build:webpack
+```
+
 open http://localhost:3000
