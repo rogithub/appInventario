@@ -52,48 +52,39 @@
                 colorDark: "#000000",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
-            });        
+            });
+
+            $("img").addClass("rounded mx-auto d-block");
         };
     </script>
 
     <script id="QrCode" type="text/html">
-        <div class="position-absolute top-50 start-50 translate-middle" data-bind="attr: { id: $data }"></div>
+        <div data-bind="attr: { id: $data }"></div>
     </script>
     
     <script id="MonederoContent" type="text/html">
         <div id="monedero-data">    
-            <div class="card">
-                <h5 class="card-header">Monedero</h5>
+            <div class="card border-info">
                 <div class="card-body">
-                    <div class="position-relative" style="height: 200px;">                    
+                    <h5 class="card-title" data-bind="text: data.cliente.nombre">Monedero</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary" data-bind="text: 'Cliente desde ' +  miembroDesde()"></h6>                
+                    <div style="height: 250px;">                    
                         <!-- ko template: { name: "QrCode", data: data.cliente.id, afterRender: () => toQr(data.cliente.id) } -->
-                        <!-- /ko -->  
-                    </div>    
+                        <!-- /ko -->
+                        <p class="card-text pt-4">
+                            Muestra el código QR al cajero para acumular puntos en todas tus compras.                       
+                            También lo puedes usar para pagar con dinero de tu monedero electrónico.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <hr />
-    
-            <div class="card">
-                <h5 class="card-header" data-bind="text: data.cliente.nombre"></h5>
-                <div class="card-body">
-                    <p class="card-text">
-                        Muestra el código QR al cajero para acumular puntos en todas tus compras.        
-                    </p>
-                    <p>
-                        También lo puedes usar para pagar con dinero de tu monedero electrónico.
-                    </p>
-                    <p class="card-text"><small class="text-body-secondary" data-bind="text: 'Cliente desde ' +  miembroDesde()"></small></p>
-                </div>
-            </div>
-    
-            <hr />
+            </div>         
     
             <!-- ko if: data.ventaMonederos.length === 0 -->
             <h3>No tiene compras recientes</h3>
             <!-- /ko -->
     
             <!-- ko if: data.ventaMonederos.length > 0 -->
-            <table class="table g-3">
+            <table class="table g-3 mt-4">
                 <thead>        
                     <tr class="table-primary">
                         <th scope="col">Mis Compras</th>
@@ -104,7 +95,7 @@
                 <tbody data-bind="foreach: { data: data.ventaMonederos, as: 'v' }">
                     <tr>
                         <td>
-                            <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" data-bind="attr: { href: '/recibo/' + v.ajusteId }" title="Recibo digital">
+                            <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" data-bind="attr: { href: 'https://papeleria.xplaya.com/recibo/' + v.ajusteId }" title="Recibo digital" target="_blank">
                                 <span data-bind="text: $root.toShortDate(v.fechaAjuste)"></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
