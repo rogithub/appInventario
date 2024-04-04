@@ -3,7 +3,7 @@ import { BinderService } from "../services/binderService";
 import toShortDate from "../shared/toShortDate";
 import toShortMonth from "../shared/toShortMonth";
 import toCurrency from "../shared/toCurrency";
-const apiServer = "https://localhost:7049"
+const apiServer = "http://localhost:5293"
 
 export interface IVentaMonedero {
     clienteId: string,
@@ -59,16 +59,19 @@ export class Monedero {
 
 const monedero = $("#monedero");
 const monederoAttr = "data-cliente-id";
-let getId = () => monedero.attr(monederoAttr);
-let getIdFromUrl = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const guid = urlParams.get('id');
-  console.log(guid);
-  return guid;
+let getIdFromStorage = () => localStorage.getItem("id");
+
+let visitaPapeleria = () => {
+  let visita = `<p>Visita la papelería para obtener la applicación móvil</p>`;
+  $("#monedero-data").contents();
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const id = getIdFromUrl();
+  const id = getIdFromStorage();
+  if (!id) {
+    visitaPapeleria();
+    return;
+  }
   let url = `${apiServer}/app/getdata?clienteId=${id}`;
   var resp = await fetch(url);
   var data = await resp.json() as unknown;
@@ -81,23 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log("binding ko");    
   }
   else {
-    let visita = `<p>Visita la papelería para obtener la applicación móvil</p>`;
-    $("#monedero-data").contents();
+    visitaPapeleria();
   }
 
 }, false);
-
-// Registering Service Worker
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-      .register("/static/sw.js")
-      .then(registration => {
-          console.log("Service Worker Registered");
-          console.log(registration);
-      }).catch(err => {
-          console.log("Fail registering Service Worker");
-          console.log(err);
-      });
-} else {
-
-}

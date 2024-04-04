@@ -1,11 +1,7 @@
-// https://stackoverflow.com/questions/47160929/progressive-web-app-uncaught-in-promise-typeerror-failed-to-fetch
-// https://web.dev/articles/offline-cookbook
-// https://serviceworke.rs/strategy-cache-and-update_service-worker_doc.html
-
-const apiServer = "https://localhost:7049"
-const clientDataCache = "client-data-version-0.0.2";
-const dynamicCache = "dynamic-version-0.0.2";
-const staticCache = "static-version-0.0.2";
+const apiServer = "http://localhost:5293"
+const clientDataCache = "client-data-version-0.0.1";
+const dynamicCache = "dynamic-version-0.0.1";
+const staticCache = "static-version-0.0.1";
 const validKeys = [clientDataCache, dynamicCache, staticCache];
 
 self.addEventListener('activate', e => {
@@ -22,10 +18,8 @@ self.addEventListener('activate', e => {
     );
 });
 
-
 const staticAssets = [    
     "/"
-    ,"/index.html"
     ,"/static/js/shared.js"
     ,"/static/js/monedero.js"
     ,"/static/lib/qrcode.min.js"

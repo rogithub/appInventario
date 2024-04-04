@@ -48,7 +48,7 @@ var binderService_1 = __webpack_require__(840);
 var toShortDate_1 = __webpack_require__(795);
 var toShortMonth_1 = __webpack_require__(297);
 var toCurrency_1 = __webpack_require__(646);
-var apiServer = "https://localhost:7049";
+var apiServer = "http://localhost:5293";
 var Monedero = /** @class */ (function () {
     function Monedero() {
         var self = this;
@@ -84,19 +84,21 @@ var Monedero = /** @class */ (function () {
 exports.Monedero = Monedero;
 var monedero = $("#monedero");
 var monederoAttr = "data-cliente-id";
-var getId = function () { return monedero.attr(monederoAttr); };
-var getIdFromUrl = function () {
-    var urlParams = new URLSearchParams(window.location.search);
-    var guid = urlParams.get('id');
-    console.log(guid);
-    return guid;
+var getIdFromStorage = function () { return localStorage.getItem("id"); };
+var visitaPapeleria = function () {
+    var visita = "<p>Visita la papeler\u00EDa para obtener la applicaci\u00F3n m\u00F3vil</p>";
+    $("#monedero-data").contents();
 };
 document.addEventListener('DOMContentLoaded', function () { return __awaiter(void 0, void 0, void 0, function () {
-    var id, url, resp, data, d, page, visita;
+    var id, url, resp, data, d, page;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                id = getIdFromUrl();
+                id = getIdFromStorage();
+                if (!id) {
+                    visitaPapeleria();
+                    return [2 /*return*/];
+                }
                 url = "".concat(apiServer, "/app/getdata?clienteId=").concat(id);
                 return [4 /*yield*/, fetch(url)];
             case 1:
@@ -113,27 +115,12 @@ document.addEventListener('DOMContentLoaded', function () { return __awaiter(voi
                     console.log("binding ko");
                 }
                 else {
-                    visita = "<p>Visita la papeler\u00EDa para obtener la applicaci\u00F3n m\u00F3vil</p>";
-                    $("#monedero-data").contents();
+                    visitaPapeleria();
                 }
                 return [2 /*return*/];
         }
     });
 }); }, false);
-// Registering Service Worker
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker
-        .register("/static/sw.js")
-        .then(function (registration) {
-        console.log("Service Worker Registered");
-        console.log(registration);
-    }).catch(function (err) {
-        console.log("Fail registering Service Worker");
-        console.log(err);
-    });
-}
-else {
-}
 
 
 /***/ }),
