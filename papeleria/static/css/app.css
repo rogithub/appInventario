@@ -15,6 +15,7 @@ html {
 }
 
 body {
+    background: url('/static/img/bg.jpg') center/cover no-repeat;
     margin-bottom: 60px !important;
 }
 

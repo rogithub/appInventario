@@ -1,7 +1,7 @@
 const apiServer = "http://localhost:5293"
-const clientDataCache = "client-data-version-0.0.1";
-const dynamicCache = "dynamic-version-0.0.1";
-const staticCache = "static-version-0.0.1";
+const clientDataCache = "client-data-version-0.0.0";
+const dynamicCache = "dynamic-version-0.0.0";
+const staticCache = "static-version-0.0.0";
 const validKeys = [clientDataCache, dynamicCache, staticCache];
 
 self.addEventListener('activate', e => {
@@ -23,8 +23,9 @@ const staticAssets = [
     ,"/static/js/shared.js"
     ,"/static/js/monedero.js"
     ,"/static/lib/qrcode.min.js"
+    ,"/static/img/bg.jpg"
     ,"/static/css/app.css"
-    ,"/static/img/favicon.ico"    
+    ,"/static/img/favicon.ico"
     ,"/static/img/recibo.jpg"
     ,"/static/img/lapiz.png"
     ,"/static/img/lapiz48.png"
