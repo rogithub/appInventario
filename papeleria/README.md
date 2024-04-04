@@ -14,3 +14,8 @@ bun run build:webpack
 ```
 
 open http://localhost:3000
+
+To deploy
+```sh
+scp -r static negrita.ro:/var/www/html/app
+```
