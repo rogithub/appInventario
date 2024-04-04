@@ -2,6 +2,7 @@
 // https://web.dev/articles/offline-cookbook
 // https://serviceworke.rs/strategy-cache-and-update_service-worker_doc.html
 
+const apiServer = "https://localhost:7049"
 const clientDataCache = "client-data-version-0.0.2";
 const dynamicCache = "dynamic-version-0.0.2";
 const staticCache = "static-version-0.0.2";
@@ -59,7 +60,7 @@ self.addEventListener("install", e => {
 
 self.addEventListener("fetch", e => {
     console.log(`Fetching ${e.request.url}`);
-    let clientDataUrl = `https://papeleria.xplaya.com/app/getdata?clienteId`;
+    let clientDataUrl = `${apiServer}/app/getdata?clienteId`;
     let isClientData = e.request.url.indexOf(clientDataUrl) != -1;
     let cacheToUse = isClientData ? clientDataCache : dynamicCache;
 

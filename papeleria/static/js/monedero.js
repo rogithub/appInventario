@@ -48,6 +48,7 @@ var binderService_1 = __webpack_require__(840);
 var toShortDate_1 = __webpack_require__(795);
 var toShortMonth_1 = __webpack_require__(297);
 var toCurrency_1 = __webpack_require__(646);
+var apiServer = "https://localhost:7049";
 var Monedero = /** @class */ (function () {
     function Monedero() {
         var self = this;
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () { return __awaiter(voi
         switch (_a.label) {
             case 0:
                 id = getIdFromUrl();
-                url = "https://papeleria.xplaya.com/app/getdata?clienteId=".concat(id);
+                url = "".concat(apiServer, "/app/getdata?clienteId=").concat(id);
                 return [4 /*yield*/, fetch(url)];
             case 1:
                 resp = _a.sent();

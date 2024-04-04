@@ -3,6 +3,7 @@ import { BinderService } from "../services/binderService";
 import toShortDate from "../shared/toShortDate";
 import toShortMonth from "../shared/toShortMonth";
 import toCurrency from "../shared/toCurrency";
+const apiServer = "https://localhost:7049"
 
 export interface IVentaMonedero {
     clienteId: string,
@@ -68,7 +69,7 @@ let getIdFromUrl = () => {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const id = getIdFromUrl();
-  let url = `https://papeleria.xplaya.com/app/getdata?clienteId=${id}`;
+  let url = `${apiServer}/app/getdata?clienteId=${id}`;
   var resp = await fetch(url);
   var data = await resp.json() as unknown;
   var d = data as IMonederoData;
