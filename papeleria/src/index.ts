@@ -14,6 +14,7 @@ app.use(
 )
 
 app.get('/', serveStatic({ path: '/static/index.html' }));
+app.get('/sw.js', serveStatic({ path: '/static/sw.js' }));
 
 
 export default app

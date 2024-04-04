@@ -47,7 +47,7 @@ let setIdToStorage = () => {
 if ("serviceWorker" in navigator && storageAvailable("localStorage")) {
     setIdToStorage();
     navigator.serviceWorker
-        .register("/static/sw.js")
+        .register("/sw.js")
         .then(registration => {
             console.log("Service Worker Registered");
             console.log(registration);

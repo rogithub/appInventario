@@ -16,16 +16,19 @@
 <body>
     <div class="container">
         <main role="main" class="pb-3">
-            <div id="monederoPage">
-                <h1 id="monedero" style="color: #b61a1a" data-cliente-id='00000000-0000-0000-0000-000000000000'>Monedero Electrónico</h1>
+            <div id="monederoPage">                
                 <!-- ko if: init() -->
+                    <h1 id="monedero" style="color: #b61a1a" data-cliente-id='00000000-0000-0000-0000-000000000000'>Monedero Electrónico</h1>
                     <!-- ko template: { name: "MonederoContent" } -->
                     <!-- /ko -->
                 <!-- /ko -->
                 <!-- ko if: !init() -->
-                    <p>
+                <div style="padding-top: 50px;" class="text-center">
+                    <h1>
                         Visita nuestra papelería para que te instalemos la app.
-                    </p>
+                    </h1>
+                </div>
+                    
                 <!-- /ko -->
             </div>
         </main>

@@ -1,7 +1,7 @@
 const apiServer = "http://localhost:5293"
-const clientDataCache = "client-data-version-0.0.0";
-const dynamicCache = "dynamic-version-0.0.0";
-const staticCache = "static-version-0.0.0";
+const clientDataCache = "client-data-version-0.0.1";
+const dynamicCache = "dynamic-version-0.0.1";
+const staticCache = "static-version-0.0.1";
 const validKeys = [clientDataCache, dynamicCache, staticCache];
 
 self.addEventListener('activate', e => {
