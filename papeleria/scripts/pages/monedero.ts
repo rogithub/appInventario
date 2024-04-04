@@ -59,9 +59,15 @@ export class Monedero {
 const monedero = $("#monedero");
 const monederoAttr = "data-cliente-id";
 let getId = () => monedero.attr(monederoAttr);
+let getIdFromUrl = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const guid = urlParams.get('id');
+  console.log(guid);
+  return guid;
+};
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const id = getId();
+  const id = getIdFromUrl();
   let url = `https://papeleria.xplaya.com/app/getdata?clienteId=${id}`;
   var resp = await fetch(url);
   var data = await resp.json() as unknown;

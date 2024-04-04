@@ -84,12 +84,18 @@ exports.Monedero = Monedero;
 var monedero = $("#monedero");
 var monederoAttr = "data-cliente-id";
 var getId = function () { return monedero.attr(monederoAttr); };
+var getIdFromUrl = function () {
+    var urlParams = new URLSearchParams(window.location.search);
+    var guid = urlParams.get('id');
+    console.log(guid);
+    return guid;
+};
 document.addEventListener('DOMContentLoaded', function () { return __awaiter(void 0, void 0, void 0, function () {
     var id, url, resp, data, d, page, visita;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                id = getId();
+                id = getIdFromUrl();
                 url = "https://papeleria.xplaya.com/app/getdata?clienteId=".concat(id);
                 return [4 /*yield*/, fetch(url)];
             case 1:
