@@ -4,17 +4,17 @@ import { serveStatic } from '@hono/node-server/serve-static'
 const app = new Hono()
 
 app.use(
-  '/static/*',
+  '/*',
   serveStatic({
-    root: './',
+    root: './static',
     onNotFound: (path, c) => {
       console.log(`${path} is not found, request to ${c.req.path}`)
     },
   })
 )
 
-app.get('/', serveStatic({ path: '/static/index.html' }));
-app.get('/sw.js', serveStatic({ path: '/static/sw.js' }));
+app.get('/', serveStatic({ path: '/index.html' }));
+app.get('/sw.js', serveStatic({ path: '/sw.js' }));
 
 
 export default app

@@ -1,7 +1,7 @@
 const apiServer = "http://localhost:5293"
-const clientDataCache = "client-data-version-0.0.1";
-const dynamicCache = "dynamic-version-0.0.1";
-const staticCache = "static-version-0.0.1";
+const clientDataCache = "client-data-version-0.0.0";
+const dynamicCache = "dynamic-version-0.0.0";
+const staticCache = "static-version-0.0.0";
 const validKeys = [clientDataCache, dynamicCache, staticCache];
 
 self.addEventListener('activate', e => {
@@ -19,22 +19,22 @@ self.addEventListener('activate', e => {
 });
 
 const staticAssets = [    
-    "/"
-    ,"/static/js/shared.js"
-    ,"/static/js/monedero.js"
-    ,"/static/lib/qrcode.min.js"
-    ,"/static/img/bg.jpg"
-    ,"/static/css/app.css"
-    ,"/static/img/favicon.ico"
-    ,"/static/img/recibo.jpg"
-    ,"/static/img/lapiz.png"
-    ,"/static/img/lapiz48.png"
-    ,"/static/img/lapiz72.png"
-    ,"/static/img/lapiz96.png"
-    ,"/static/img/lapiz128.png"
-    ,"/static/img/lapiz192.png"
-    ,"/static/img/lapiz384.png"
-    ,"/static/img/lapiz512.png"
+    "/"    
+    ,"/js/shared.js"
+    ,"/js/monedero.js"
+    ,"/lib/qrcode.min.js"
+    ,"/img/bg.jpg"
+    ,"/css/app.css"
+    ,"/img/favicon.ico"
+    ,"/img/recibo.jpg"
+    ,"/img/lapiz.png"
+    ,"/img/lapiz48.png"
+    ,"/img/lapiz72.png"
+    ,"/img/lapiz96.png"
+    ,"/img/lapiz128.png"
+    ,"/img/lapiz192.png"
+    ,"/img/lapiz384.png"
+    ,"/img/lapiz512.png"
     ,"https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     ,"https://code.jquery.com/jquery-3.3.1.slim.min.js"
     ,"https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
