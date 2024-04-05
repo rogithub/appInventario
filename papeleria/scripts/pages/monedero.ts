@@ -36,7 +36,7 @@ export class Monedero {
         return self.data.ventaMonederos.reduce( (prev, it) => {
           return prev + it.dineroDigitalDisponible;
         }, 0);
-      }, self); 
+      }, self);      
     }
 
     public loadData(data: IMonederoData)
@@ -57,34 +57,25 @@ export class Monedero {
     }
 }
 
-const monedero = $("#monedero");
-const monederoAttr = "data-cliente-id";
 let getIdFromStorage = () => localStorage.getItem("id");
 
-let visitaPapeleria = () => {
-  let visita = `<p>Visita la papelería para obtener la applicación móvil</p>`;
-  $("#monedero-data").contents();
-};
-
 document.addEventListener('DOMContentLoaded', async () => {
-  const id = getIdFromStorage();
-  if (!id) {
-    visitaPapeleria();
+  let page = new Monedero();
+  BinderService.bind(page, "#monederoPage");
+  console.log("binding ko");
+
+  const id = getIdFromStorage();  
+
+  if (!id) {    
     return;
   }
+
   let url = `${apiServer}/app/getdata?clienteId=${id}`;
   var resp = await fetch(url);
   var data = await resp.json() as unknown;
   var d = data as IMonederoData;
-  if (d && d.cliente && d.cliente.id) {    
-    monedero.attr(monederoAttr, d.cliente.id);
-    let page = new Monedero();
+  if (d && d.cliente && d.cliente.id) {        
     page.loadData(d);
-    BinderService.bind(page, "#monederoPage");
-    console.log("binding ko");    
-  }
-  else {
-    visitaPapeleria();
   }
 
 }, false);

@@ -82,21 +82,17 @@ var Monedero = /** @class */ (function () {
     return Monedero;
 }());
 exports.Monedero = Monedero;
-var monedero = $("#monedero");
-var monederoAttr = "data-cliente-id";
 var getIdFromStorage = function () { return localStorage.getItem("id"); };
-var visitaPapeleria = function () {
-    var visita = "<p>Visita la papeler\u00EDa para obtener la applicaci\u00F3n m\u00F3vil</p>";
-    $("#monedero-data").contents();
-};
 document.addEventListener('DOMContentLoaded', function () { return __awaiter(void 0, void 0, void 0, function () {
-    var id, url, resp, data, d, page;
+    var page, id, url, resp, data, d;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                page = new Monedero();
+                binderService_1.BinderService.bind(page, "#monederoPage");
+                console.log("binding ko");
                 id = getIdFromStorage();
                 if (!id) {
-                    visitaPapeleria();
                     return [2 /*return*/];
                 }
                 url = "".concat(apiServer, "/app/getdata?clienteId=").concat(id);
@@ -108,14 +104,7 @@ document.addEventListener('DOMContentLoaded', function () { return __awaiter(voi
                 data = _a.sent();
                 d = data;
                 if (d && d.cliente && d.cliente.id) {
-                    monedero.attr(monederoAttr, d.cliente.id);
-                    page = new Monedero();
                     page.loadData(d);
-                    binderService_1.BinderService.bind(page, "#monederoPage");
-                    console.log("binding ko");
-                }
-                else {
-                    visitaPapeleria();
                 }
                 return [2 /*return*/];
         }
