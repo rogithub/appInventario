@@ -1,4 +1,4 @@
-const apiServer = "http://localhost:5293"
+const apiServer = "https://app.xplaya.com"; //"http://localhost:5293"
 const clientDataCache = "client-data-version-0.0.0";
 const dynamicCache = "dynamic-version-0.0.0";
 const staticCache = "static-version-0.0.0";

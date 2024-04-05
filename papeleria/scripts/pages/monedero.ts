@@ -3,7 +3,7 @@ import { BinderService } from "../services/binderService";
 import toShortDate from "../shared/toShortDate";
 import toShortMonth from "../shared/toShortMonth";
 import toCurrency from "../shared/toCurrency";
-const apiServer = "http://localhost:5293"
+const apiServer = "https://app.xplaya.com"; //"http://localhost:5293"
 
 export interface IVentaMonedero {
     clienteId: string,
