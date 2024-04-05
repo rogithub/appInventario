@@ -48,7 +48,8 @@ var binderService_1 = __webpack_require__(840);
 var toShortDate_1 = __webpack_require__(795);
 var toShortMonth_1 = __webpack_require__(297);
 var toCurrency_1 = __webpack_require__(646);
-var apiServer = "https://app.xplaya.com"; //"http://localhost:5293"
+var apiServer = window.location.hostname === "localhost" ?
+    "http://localhost:5293" : "https://app.xplaya.com";
 var Monedero = /** @class */ (function () {
     function Monedero() {
         var self = this;
