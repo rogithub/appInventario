@@ -4,7 +4,7 @@ import toShortDate from "../shared/toShortDate";
 import toShortMonth from "../shared/toShortMonth";
 import toCurrency from "../shared/toCurrency";
 const apiServer = window.location.hostname === "localhost" ? 
-"http://localhost:5293" : "https://app.xplaya.com";
+"http://localhost:5293" : "https://papeleria.xplaya.com";
 
 export interface IVentaMonedero {
     clienteId: string,

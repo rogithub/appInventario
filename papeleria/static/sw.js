@@ -1,8 +1,8 @@
 const apiServer = self.location.hostname === "localhost" ? 
-"http://localhost:5293" : "https://app.xplaya.com";
-const clientDataCache = "client-data-version-0.0.1";
-const dynamicCache = "dynamic-version-0.0.1";
-const staticCache = "static-version-0.0.1";
+"http://localhost:5293" : "https://papeleria.xplaya.com";
+const clientDataCache = "client-data-version-0.0.2";
+const dynamicCache = "dynamic-version-0.0.2";
+const staticCache = "static-version-0.0.2";
 const validKeys = [clientDataCache, dynamicCache, staticCache];
 
 self.addEventListener('activate', e => {
