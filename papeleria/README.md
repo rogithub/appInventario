@@ -19,3 +19,6 @@ To deploy
 ```sh
 scp -r static/* negrita.ro:/var/www/html/app
 ```
+
+
+curl -fsSL https://bun.sh/install | bash
