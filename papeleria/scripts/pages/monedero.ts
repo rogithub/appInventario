@@ -22,6 +22,7 @@ export interface IMonederoData {
 export class Monedero {
     public data: IMonederoData;
     public init: KnockoutObservable<boolean>;
+    public navigatorShare: KnockoutObservable<boolean>;
     public miembroDesde: KnockoutComputed<string>;
     public dineroDisponible: KnockoutComputed<number>;
     constructor()
@@ -37,7 +38,9 @@ export class Monedero {
         return self.data.ventaMonederos.reduce( (prev, it) => {
           return prev + it.dineroDigitalDisponible;
         }, 0);
-      }, self);      
+      }, self);
+
+      this.navigatorShare = ko.observable(navigator.share !== undefined);
     }
 
     public loadData(data: IMonederoData)
@@ -55,6 +58,19 @@ export class Monedero {
     public toCurrency (amt: number) {
       const self = this;
       return toCurrency(amt);
+    }
+
+    public async enivarMapa () {
+      const self = this;      
+      const title = "Compartir mapa";
+      const text = "Compartir mapa";
+      const url = "https://maps.app.goo.gl/rxAPksXn2iCjocSf7";
+      try {
+          await window.navigator.share({title, text, url});
+          console.log('The content was shared successfully');
+      } catch (e) {
+          console.error('Error sharing the content', e);
+      }
     }
 }
 

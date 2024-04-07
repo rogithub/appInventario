@@ -58,6 +58,3 @@ if ("serviceWorker" in navigator && storageAvailable("localStorage")) {
 } else {
 
 }
-  
-  
-  

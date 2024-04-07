@@ -66,6 +66,7 @@ var Monedero = /** @class */ (function () {
                 return prev + it.dineroDigitalDisponible;
             }, 0);
         }, self);
+        this.navigatorShare = ko.observable(navigator.share !== undefined);
     }
     Monedero.prototype.loadData = function (data) {
         var self = this;
@@ -79,6 +80,33 @@ var Monedero = /** @class */ (function () {
     Monedero.prototype.toCurrency = function (amt) {
         var self = this;
         return (0, toCurrency_1.default)(amt);
+    };
+    Monedero.prototype.enivarMapa = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var self, title, text, url, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        self = this;
+                        title = "Compartir mapa";
+                        text = "Compartir mapa";
+                        url = "https://maps.app.goo.gl/rxAPksXn2iCjocSf7";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, window.navigator.share({ title: title, text: text, url: url })];
+                    case 2:
+                        _a.sent();
+                        console.log('The content was shared successfully');
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_1 = _a.sent();
+                        console.error('Error sharing the content', e_1);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
     };
     return Monedero;
 }());
