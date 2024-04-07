@@ -55,6 +55,4 @@ if ("serviceWorker" in navigator && storageAvailable("localStorage")) {
             console.log("Fail registering Service Worker");
             console.log(err);
         });
-} else {
-
 }
