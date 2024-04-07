@@ -40,7 +40,11 @@ export class Monedero {
         }, 0);
       }, self);
 
-      this.navigatorShare = ko.observable(navigator.share !== undefined);
+      this.navigatorShare = ko.observable(
+        window !== undefined &&
+        window.navigator !== undefined &&
+        window.navigator.share !== undefined
+      );
     }
 
     public loadData(data: IMonederoData)

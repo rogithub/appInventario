@@ -66,7 +66,9 @@ var Monedero = /** @class */ (function () {
                 return prev + it.dineroDigitalDisponible;
             }, 0);
         }, self);
-        this.navigatorShare = ko.observable(navigator.share !== undefined);
+        this.navigatorShare = ko.observable(window !== undefined &&
+            window.navigator !== undefined &&
+            window.navigator.share !== undefined);
     }
     Monedero.prototype.loadData = function (data) {
         var self = this;
