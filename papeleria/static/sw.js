@@ -1,8 +1,8 @@
 const apiServer = self.location.hostname === "localhost" ? 
 "http://localhost:5293" : "https://papeleria.xplaya.com";
-const clientDataCache = "client-data-version-0.0.4";
-const dynamicCache = "dynamic-version-0.0.4";
-const staticCache = "static-version-0.0.4";
+const clientDataCache = "client-data-version-0.0.5";
+const dynamicCache = "dynamic-version-0.0.5";
+const staticCache = "static-version-0.0.5";
 const validKeys = [clientDataCache, dynamicCache, staticCache];
 
 self.addEventListener('activate', e => {
@@ -59,21 +59,48 @@ self.addEventListener("fetch", e => {
     let clientDataUrl = `${apiServer}/app/getdata?clienteId`;
     let isClientData = e.request.url.indexOf(clientDataUrl) != -1;
     let cacheToUse = isClientData ? clientDataCache : dynamicCache;
+    let options = { 
+        ignoreSearch: isClientData 
+    };
+    let fetchStrategy = isClientData ? getServerFirst : getCacheFirst;
 
-    e.respondWith(
-        caches.match(e.request, {
-            // ignores the id part
-            ignoreSearch: isClientData 
-          }).then(response => {
-            return response || fetch(e.request).then(freq => {
-                return caches.open(cacheToUse).then( cache => { 
-                    cache.put(e.request.url, freq.clone());                    
-                    return freq;
-                })
-            });
-        }).catch( () =>  {
-            if (e.request.url.indexOf(".") === -1)
-                return caches.match("/");
-        })
-    );
+    e.respondWith((async () => {
+        return await fetchStrategy(e, cacheToUse, options);
+     })());
 });
+
+let getCacheFirst = async (e, cacheToUse, options) => {
+    try {
+        let response = await caches.match(e.request, options);
+        if (response)
+        {
+            return response;
+        }
+
+        response = await fetch(e.request);
+        let cache = await caches.open(cacheToUse);
+        cache.put(e.request.url, response.clone());
+        return response
+
+    } catch {
+        if (e.request.url.indexOf(".") === -1)
+            return caches.match("/");
+    }
+}
+
+let getServerFirst = async (e, cacheToUse, options) => {
+    try {
+        let response = await fetch(e.request);
+        let cache = await caches.open(cacheToUse);
+        cache.put(e.request.url, response.clone());
+        return response;     
+    } catch (err) {
+        let response = await caches.match(e.request, options);
+        if (response)
+        {
+            return response;
+        }
+        if (e.request.url.indexOf(".") === -1)
+            return caches.match("/");
+    }
+}
