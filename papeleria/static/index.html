@@ -24,14 +24,10 @@
     </div>
 
     <footer class="border-top footer text-body-secondary d-print-none">
-        <div class="container">
-        &copy; 2024 - aplicaciones móviles | contacto@xplaya.com
+        <div class="container text-center">
+        Aplicaciones móviles | contacto@xplaya.com
         </div>
     </footer>
-    
-    <script id="QrCode" type="text/html">
-        <div data-bind="attr: { id: $data }"></div>
-    </script>    
     
     <script id="SinRegistro" type="text/html">
         <div class="card border-info">
@@ -41,21 +37,23 @@
         </div> 
     </script>
 
+    <script id="QrCode" type="text/html">
+        <p data-bind="attr: { id: $data }"></p>
+    </script>    
+    
     <script id="MonederoContent" type="text/html">
         <div id="monedero-data">    
             <div class="card border-info">
                 <div class="card-body">
-                    <h3 id="monedero" style="color: #b61a1a" data-cliente-id='00000000-0000-0000-0000-000000000000'>Monedero Electrónico</h3>
+                    <h3 class="card-title" id="monedero" style="color: #b61a1a" data-cliente-id='00000000-0000-0000-0000-000000000000'>Monedero Electrónico</h3>
                     <h5 class="card-title" data-bind="text: data.cliente.nombre">Monedero</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary" data-bind="text: 'Cliente desde ' +  miembroDesde()"></h6>                
-                    <div class="m-4">                    
-                        <!-- ko template: { name: "QrCode", data: data.cliente.id, afterRender: () => toQr(data.cliente.id) } -->
-                        <!-- /ko -->
-                        <p class="card-text pt-4">
-                            Muestra el código QR al cajero para acumular puntos en todas tus compras.                       
-                            También lo puedes usar para pagar con dinero de tu monedero electrónico.
-                        </p>
-                    </div>
+                    <!-- ko template: { name: "QrCode", data: data.cliente.id, afterRender: () => toQr(data.cliente.id) } -->
+                    <!-- /ko -->
+                    <p class="card-text pt-4">
+                        Muestra el código QR al cajero para acumular puntos en todas tus compras.                       
+                        También lo puedes usar para pagar con dinero de tu monedero electrónico.
+                    </p>
                 </div>
             </div>         
     
