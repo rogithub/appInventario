@@ -55,7 +55,6 @@ self.addEventListener("install", e => {
 });
 
 self.addEventListener("fetch", e => {
-    console.log(`Fetching ${e.request.url}`);
     let clientDataUrl = `${apiServer}/app/getdata?clienteId`;
     let isClientData = e.request.url.indexOf(clientDataUrl) != -1;
     let cacheToUse = isClientData ? clientDataCache : dynamicCache;
@@ -63,6 +62,8 @@ self.addEventListener("fetch", e => {
         ignoreSearch: isClientData 
     };
     let fetchStrategy = isClientData ? getServerFirst : getCacheFirst;
+    let strategyStr = isClientData ? "server" : "cache";
+    console.log(`Fetching ${e.request.url} from ${strategyStr}`);
 
     e.respondWith((async () => {
         return await fetchStrategy(e, cacheToUse, options);
